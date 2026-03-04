@@ -1,5 +1,6 @@
 import { body } from 'express-validator'
 
 export const toDoListValidations = [
-  body('todo', 'Title').trim().required(),
+  body('userId', 'userId is required').trim().required(),
+  body('todo', 'Todo title is required').trim().required(),
 ]

@@ -5,7 +5,7 @@ import cors from 'cors';
 import { MONGO_URI, PORT } from "./lib/constants/index.js";
 import { checkAuth, handleValidationErrors } from "./utils/index.js";
 import { registerValidation, loginValidation } from "./validations/userValidations.js";
-// import { toDoListValidations } from "./validations/toDoListValidations.js";
+import { toDoListValidations } from "./validations/toDoListValidations.js";
 import { UserController, ToDoListController } from "./controllers/index.js";
 
 // Connecting to a database
@@ -28,7 +28,7 @@ app.get('/auth/user', checkAuth, UserController.getMe)
 // fetch todo list
 app.get('/todo_list', checkAuth, ToDoListController.fetchToDoList)
 // create todo list
-app.post('/todo_list', checkAuth, ToDoListController.createToDoListItem)
+app.post('/todo_list', checkAuth, toDoListValidations, handleValidationErrors, ToDoListController.createToDoListItem)
 // update todo list
 app.patch('/todo_list/:id', checkAuth, ToDoListController.updateToDoListItem)
 // delete todo list

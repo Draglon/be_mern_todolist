@@ -1,8 +1,9 @@
 import ToDoListModel from '../models/ToDoList.js';
 
-export const fetchToDoList = async (_, res) => {
+export const fetchToDoList = async (req, res) => {
   try {
-    const todoList = await ToDoListModel.find({});
+    const userId = req.params.id;
+    const todoList = await ToDoListModel.findById(userId);
 
     if (!todoList) {
       return res.status(404).json({
@@ -22,6 +23,7 @@ export const fetchToDoList = async (_, res) => {
 export const createToDoListItem = async (req, res) => {
   try {
     const todoList = new ToDoListModel();
+    todoList.userId = req.body.userId;
     todoList.todo = req.body.todo;
 
     const todoListData = await todoList.save();
