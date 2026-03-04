@@ -22,17 +22,7 @@ export const fetchToDoList = async (_, res) => {
 export const createToDoListItem = async (req, res) => {
   try {
     const todoList = new ToDoListModel();
-    const {
-      title,
-      description,
-      date,
-      products,
-    } = req.body;
-
-    todoList.title = title;
-    todoList.description = description;
-    todoList.date = date;
-    todoList.products = products;
+    todoList.todo = req.body.todo;
 
     const todoListData = await todoList.save();
 
@@ -50,7 +40,7 @@ export const updateToDoListItem = async (req, res) => {
     const todoListItemId = req.params.id;
     const todoListItem = await ToDoListModel.findById(todoListItemId);
 
-    todoListItem.skills[req.body.locale] = JSON.stringify(req.body.skills);
+    todoListItem.todo = req.body.todo;
     todoListItem.set('userId', req.body.userId);
 
     const todoListItemData = await todoListItem.save();

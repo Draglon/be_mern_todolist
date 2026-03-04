@@ -1,5 +1,5 @@
 {
-  "name": "be_inventory",
+  "name": "be_mern_todo_list",
   "version": "1.0.0",
   "description": "inventory",
   "main": "index.js",

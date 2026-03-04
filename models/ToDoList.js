@@ -6,11 +6,7 @@ const ToDoListSchema = new mongoose.Schema({
     ref: "User",
     default: null,
   },
-  title: {
-    type: String,
-    required: true,
-  },
-  description: {
+  todo: {
     type: String,
     required: true,
   },
@@ -19,4 +15,4 @@ const ToDoListSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-export default mongoose.model('Order', ToDoListSchema);
+export default mongoose.model('TodoList', ToDoListSchema);
