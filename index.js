@@ -5,8 +5,8 @@ import cors from 'cors';
 import { MONGO_URI, PORT } from "./lib/constants/index.js";
 import { checkAuth, handleValidationErrors } from "./utils/index.js";
 import { registerValidation, loginValidation } from "./validations/userValidations.js";
-import { toDoListValidations } from "./validations/toDoListValidations.js";
-import { UserController, ToDoListController } from "./controllers/index.js";
+import { todoListValidations } from "./validations/todoListValidations.js";
+import { UserController, TodoListController } from "./controllers/index.js";
 
 // Connecting to a database
 mongoose
@@ -26,13 +26,13 @@ app.post('/auth/register', registerValidation, handleValidationErrors, UserContr
 app.get('/auth/user', checkAuth, UserController.getMe)
 
 // fetch todo list
-app.get('/todo_list', checkAuth, ToDoListController.fetchToDoList)
+app.get('/todo_list', checkAuth, TodoListController.fetchTodoList)
 // create todo list
-app.post('/todo_list', checkAuth, toDoListValidations, handleValidationErrors, ToDoListController.createToDoListItem)
+app.post('/todo_list', checkAuth, todoListValidations, handleValidationErrors, TodoListController.createTodoListItem)
 // update todo list
-app.patch('/todo_list/:id', checkAuth, ToDoListController.updateToDoListItem)
+app.patch('/todo_list/:id', checkAuth, TodoListController.updateTodoListItem)
 // delete todo list
-app.delete('/todo_list/:id', checkAuth, ToDoListController.deleteToDoListItem)
+app.delete('/todo_list/:id', checkAuth, TodoListController.deleteTodoListItem)
 
 // Start server
 app.listen(PORT, (error) => {

@@ -1,9 +1,8 @@
-import ToDoListModel from '../models/ToDoList.js';
+import TodoListModel from '../models/TodoList.js';
 
-export const fetchToDoList = async (req, res) => {
+export const fetchTodoList = async (req, res) => {
   try {
-    const userId = req.params.id;
-    const todoList = await ToDoListModel.findById(userId);
+    const todoList = await TodoListModel.find({ userId: req.userId });
 
     if (!todoList) {
       return res.status(404).json({
@@ -20,9 +19,9 @@ export const fetchToDoList = async (req, res) => {
   }
 }
 
-export const createToDoListItem = async (req, res) => {
+export const createTodoListItem = async (req, res) => {
   try {
-    const todoList = new ToDoListModel();
+    const todoList = new TodoListModel();
     todoList.userId = req.body.userId;
     todoList.todo = req.body.todo;
 
@@ -37,10 +36,10 @@ export const createToDoListItem = async (req, res) => {
   }
 }
 
-export const updateToDoListItem = async (req, res) => {
+export const updateTodoListItem = async (req, res) => {
   try {
     const todoListItemId = req.params.id;
-    const todoListItem = await ToDoListModel.findById(todoListItemId);
+    const todoListItem = await TodoListModel.findById(todoListItemId);
 
     todoListItem.todo = req.body.todo;
     todoListItem.set('userId', req.body.userId);
@@ -56,10 +55,10 @@ export const updateToDoListItem = async (req, res) => {
   }
 }
 
-export const deleteToDoListItem = async (req, res) => {
+export const deleteTodoListItem = async (req, res) => {
   try {
     const todoListItemId = req.params.id;
-    await ToDoListModel.findByIdAndDelete(todoListItemId);
+    await TodoListModel.findByIdAndDelete(todoListItemId);
 
     res.status(200).send(`Item with ID ${todoListItemId} deleted successfully.`);
   } catch (error) {

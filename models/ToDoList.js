@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const ToDoListSchema = new mongoose.Schema({
+const TodoListSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
@@ -15,4 +15,4 @@ const ToDoListSchema = new mongoose.Schema({
   timestamps: true,
 });
 
-export default mongoose.model('TodoList', ToDoListSchema);
+export default mongoose.model('TodoList', TodoListSchema);
