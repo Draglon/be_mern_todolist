@@ -2,7 +2,7 @@ import TodoListModel from '../models/TodoList.js';
 
 export const fetchTodoList = async (req, res) => {
   try {
-    const todoList = await TodoListModel.find({ userId: req.userId });
+    const todoList = await TodoListModel.find({ userId: req.query.userId });
 
     if (!todoList) {
       return res.status(404).json({
